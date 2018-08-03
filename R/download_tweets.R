@@ -7,12 +7,12 @@
 #' @param statuses data frame of tweet IDs
 #'
 #' @return A tibble of tweets data.
-#'
-#' TODO: Work around twitter rate limits https://github.com/mkearney/rtweet/blob/master/R/statuses.R#L3
 
-download_tweets <- function(consumer_key, consumer_secret, access_token, access_secret, statuses) {
+download_tweets <- function(consumer_key, consumer_secret, access_token, access_secret, status_ids) {
   # Use the rtweet library to access the Twitter API (https://github.com/mkearney/rtweet)
   library(rtweet)
+  library(tidyverse)
+  library(dplyr)
 
   create_token(
     app = "Download Tweets",
@@ -22,21 +22,43 @@ download_tweets <- function(consumer_key, consumer_secret, access_token, access_
     access_secret = access_secret)
 
   # Make the data frame atomic
-  statuses <- as.character(unlist(statuses))
+  status_ids <- as.character(unlist(status_ids))
 
-  tweets <- tryCatch(
-    {
+  message(sprintf("%s - Total number of Tweet ids: %s", Sys.time(), length(status_ids)))
+
+  # Split the status ids in groups of 89,990 in order to advoid the 90,000/15 min api call limit
+  rate_limited_status_ids <- split(status_ids, ceiling(seq_along(status_ids)/89990))
+
+  # Create an empty tibble to store the downloaded tweets
+  tweets <- tibble()
+
+  counter <- 1
+
+  for (statuses in rate_limited_status_ids) {
+    # Sleep for 15.25 mintues (915 seconds) if this isn't the first time through the loop
+    # to avoid the api call limit
+    if (counter > 1) {
+      message(sprintf("%s - Sleeping for 15 minutes", Sys.time()))
+      Sys.sleep(915)
+      message(sprintf("%s - Resuming Tweet download", Sys.time()))
+    }
+
+    counter <- counter + 1
+
+    # Download the tweets
+    for_tweets <- tryCatch({
       lookup_statuses(statuses)
     },
-    error=function(cond) {
-      message("Error: ")
-      message(cond)
+    error = function(cond) {
+      message(sprintf("Error: %s", cond))
     },
-    warning=function(cond) {
-      message("Warning: ")
-      message(cond)
-    }
-  )
+    warning = function(cond) {
+      message(sprintf("Warning: %s", cond))
+    })
 
+    tweets <- bind_rows(tweets, for_tweets)
+
+    message(sprintf("%s - Tweets downloaded: %s", Sys.time(), count(tweets)))
+  }
   return(tweets)
 }
