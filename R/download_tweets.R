@@ -4,16 +4,16 @@
 #' @param consumer_secret Consumer Secret (API Secret) from https://apps.twitter.com/
 #' @param access_token Access Token from the https://apps.twitter.com/
 #' @param access_secret Access Token Secret from https://apps.twitter.com/
-#' @param statuses data frame of tweet IDs
+#' @param status_ids data frame of tweet IDs
 #'
 #' @return A tibble of tweets data.
+#'
+#' @export
+#' @importFrom rtweet create_token lookup_statuses
+#' @import tibble
+#' @importFrom dplyr bind_rows count
 
 download_tweets <- function(consumer_key, consumer_secret, access_token, access_secret, status_ids) {
-  # Use the rtweet library to access the Twitter API (https://github.com/mkearney/rtweet)
-  library(rtweet)
-  library(tidyverse)
-  library(dplyr)
-
   create_token(
     app = "Download Tweets",
     consumer_key = consumer_key,
