@@ -11,7 +11,7 @@ saved_tweets <- "tweets.Rda"
 tweet_ids_file <- "ids.txt" # Example from https://archive.org/details/gaza-tweets
 
 # Set the working directory
-setwd('/Users/kcoakley/temp/R/')
+setwd('/home/rstudio/')
 
 # If saved_tweets exist, load the tweets from disk, otherwise download the tweets from Twitter
 if(file.exists(saved_tweets)){
