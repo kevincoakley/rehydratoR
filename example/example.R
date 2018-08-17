@@ -3,7 +3,7 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
 }
 
 # install downloadtweets from github
-devtools::install_github("kevincoakley/downloadtweets", ref = "0.2.0")
+devtools::install_github("kevincoakley/downloadtweets", ref = "0.3.0")
 
 library(downloadtweets)
 
