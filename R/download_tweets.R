@@ -32,18 +32,15 @@ download_tweets <- function(consumer_key, consumer_secret, access_token, access_
   # Create an empty tibble to store the downloaded tweets
   tweets <- tibble()
 
+  message(sprintf("%s - Splitting tweets into %s groups", Sys.time(), length(rate_limited_status_ids)))
+
   counter <- 1
 
   for (statuses in rate_limited_status_ids) {
-    # Sleep for 15.25 mintues (915 seconds) if this isn't the first time through the loop
-    # to avoid the api call limit
-    if (counter > 1) {
-      message(sprintf("%s - Sleeping for 15 minutes", Sys.time()))
-      Sys.sleep(915)
-      message(sprintf("%s - Resuming Tweet download", Sys.time()))
-    }
+    total_loop_time <- 0
+    loop_start_time <- Sys.time()
 
-    counter <- counter + 1
+    message(sprintf("\n%s - Start group: %s", Sys.time(), counter))
 
     # Download the tweets
     for_tweets <- tryCatch({
@@ -58,7 +55,23 @@ download_tweets <- function(consumer_key, consumer_secret, access_token, access_
 
     tweets <- bind_rows(tweets, for_tweets)
 
-    message(sprintf("%s - Tweets downloaded: %s", Sys.time(), count(tweets)))
+    message(sprintf("%s - Total tweets downloaded: %s", Sys.time(), count(tweets)))
+
+    loop_end_time <- Sys.time()
+
+    # Calculate the time it took to download the tweets
+    total_loop_time = as.integer(difftime(loop_end_time, loop_start_time, units = "secs"))
+
+    # If there are multiple loops, then each loop must take at 15.25 mintues (915 seconds)
+    # to avoid the api call limit
+    if (total_loop_time < 915 && counter < length(rate_limited_status_ids)) {
+      sleep_time <- 915 - total_loop_time
+      message(sprintf("%s - Sleeping for %s seconds", Sys.time(), sleep_time))
+      Sys.sleep(sleep_time)
+      message(sprintf("%s - Resuming Tweet download", Sys.time()))
+    }
+
+    counter <- counter + 1
   }
   return(tweets)
 }
