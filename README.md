@@ -27,7 +27,7 @@ We use Github for versioning.  As of 08.28.2018, v3 is most recent.
 ## Authors
 
 * **Kevin Coakley** - *programming, testing* 
-* ** Zachary Steinert-Threlkeld - *requirements, testing, promoting*
+* ** Zachary Steinert-Threlkeld** - *requirements, testing, promoting*
 
 ## License
 
