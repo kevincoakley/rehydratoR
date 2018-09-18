@@ -35,6 +35,7 @@ download_tweets <- function(consumer_key, consumer_secret, access_token, access_
   message(sprintf("%s - Splitting tweets into %s groups", Sys.time(), length(rate_limited_status_ids)))
 
   counter <- 1
+  total_tweets <- 0
 
   for (statuses in rate_limited_status_ids) {
     total_loop_time <- 0
@@ -55,7 +56,9 @@ download_tweets <- function(consumer_key, consumer_secret, access_token, access_
 
     tweets <- bind_rows(tweets, for_tweets)
 
-    message(sprintf("%s - Total tweets downloaded: %s", Sys.time(), count(tweets)))
+    # Calculate and print the total number of tweets downloaded so far
+    total_tweets <- total_tweets + count(for_tweets)
+    message(sprintf("%s - Total tweets downloaded: %s", Sys.time(), total_tweets))
 
     loop_end_time <- Sys.time()
 
