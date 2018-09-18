@@ -31,7 +31,7 @@ We use Github for versioning.  As of 08.28.2018, v3 is most recent.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the BSD License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 

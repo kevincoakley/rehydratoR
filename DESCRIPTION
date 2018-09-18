@@ -7,7 +7,7 @@ Authors@R: c(
     person("Zachary", "Steinert-Threlkeld", email = "zst@luskin.ucla.edu", role = "ctb"))
 Description: Downloads tweets from a list of tweet ids. Includes rate limiting 
     for downloading tweets that exceed Twitter's 90,000 tweets/15 minute limit.
-License: What license is it under?
+License: BSD
 Encoding: UTF-8
 LazyData: true
 Imports: 
