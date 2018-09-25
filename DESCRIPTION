@@ -13,5 +13,6 @@ LazyData: true
 Imports: 
   rtweet (>= 0.6.7),
   tibble (>= 1.3.4),
-  dplyr (>= 0.7.6)
+  dplyr (>= 0.7.6),
+  jsonlite (>= 1.5)
 RoxygenNote: 6.1.0
