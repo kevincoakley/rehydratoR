@@ -5,19 +5,15 @@
 #' @param access_token Access Token from the https://apps.twitter.com/
 #' @param access_secret Access Token Secret from https://apps.twitter.com/
 #' @param status_ids data frame of tweet IDs
-#' @param base_filename optional. The base filename to use to save the tweets. If set, the fuction will
-#'   write the tweets to files instead of returning the tweets as a variable.
 #'
-#' @return A tibble of tweets data if base_filename is not defined. Nothing is returned if base_filename is defined
-#'   but the tweets are saved to a file for about every 90,0000 tweets.
+#' @return A tibble of tweets data.
 #'
 #' @export
 #' @importFrom rtweet create_token lookup_statuses
 #' @import tibble
 #' @importFrom dplyr bind_rows count
-#' @importFrom jsonlite toJSON validate
 
-download_tweets <- function(consumer_key, consumer_secret, access_token, access_secret, status_ids, base_filename = NULL) {
+download_tweets <- function(consumer_key, consumer_secret, access_token, access_secret, status_ids) {
   create_token(
     app = "Download Tweets",
     consumer_key = consumer_key,
@@ -58,16 +54,7 @@ download_tweets <- function(consumer_key, consumer_secret, access_token, access_
       message(sprintf("Warning: %s", cond))
     })
 
-    # If base_filename is not defined then save the results to the var tweets to be returned to the
-    # user at the end of the function. If base_filename is defined then save the tweets to a file
-    # named base_filename_###.json every time though the loop.
-    if (is.null(base_filename)) {
-      tweets <- bind_rows(tweets, for_tweets)
-    } else {
-      json <- toJSON(for_tweets)
-      validate(json)
-      write(json, file = sprintf("%s_%03d.json", base_filename, counter))
-    }
+    tweets <- bind_rows(tweets, for_tweets)
 
     # Calculate and print the total number of tweets downloaded so far
     total_tweets <- total_tweets + count(for_tweets)
