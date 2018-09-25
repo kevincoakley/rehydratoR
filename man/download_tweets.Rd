@@ -5,7 +5,7 @@
 \title{Get tweets for given statuses (tweet IDs).}
 \usage{
 download_tweets(consumer_key, consumer_secret, access_token, access_secret,
-  status_ids)
+  status_ids, base_filename = NULL)
 }
 \arguments{
 \item{consumer_key}{Consumer Key (API Key) from https://apps.twitter.com/}
@@ -17,9 +17,13 @@ download_tweets(consumer_key, consumer_secret, access_token, access_secret,
 \item{access_secret}{Access Token Secret from https://apps.twitter.com/}
 
 \item{status_ids}{data frame of tweet IDs}
+
+\item{base_filename}{optional. The base filename to use to save the tweets. If set, the fuction will
+write the tweets to files instead of returning the tweets as a variable.}
 }
 \value{
-A tibble of tweets data.
+A tibble of tweets data if base_filename is not defined. Nothing is returned if base_filename is defined
+  but the tweets are saved to a file for about every 90,0000 tweets.
 }
 \description{
 Get tweets for given statuses (tweet IDs).
