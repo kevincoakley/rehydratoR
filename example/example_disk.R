@@ -3,7 +3,7 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
 }
 
 # install downloadtweets from github
-devtools::install_github("kevincoakley/downloadtweets", ref = "0.5.0")
+devtools::install_github("kevincoakley/rehydratoR", ref = "0.5.0")
 
 library(rehydratoR)
 library(jsonlite)
