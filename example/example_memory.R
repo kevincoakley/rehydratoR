@@ -3,9 +3,9 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
 }
 
 # install downloadtweets from github
-devtools::install_github("kevincoakley/downloadtweets", ref = "0.3.0")
+devtools::install_github("kevincoakley/downloadtweets", ref = "0.5.0")
 
-library(downloadtweets)
+library(rehydratoR)
 
 saved_tweets <- "tweets.Rda"
 tweet_ids_file <- "ids.txt" # Example from https://archive.org/details/gaza-tweets
@@ -27,7 +27,7 @@ if(file.exists(saved_tweets)){
   tweet_ids <- data.frame(read.table(tweet_ids_file, numerals = 'no.loss'))
 
   # Download tweets
-  tweets <- download_tweets(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet_ids)
+  tweets <- rehydratoR(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet_ids)
 
   # Save tweets to disk
   save(tweets, file=saved_tweets)
