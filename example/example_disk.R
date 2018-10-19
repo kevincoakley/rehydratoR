@@ -3,9 +3,9 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
 }
 
 # install downloadtweets from github
-devtools::install_github("kevincoakley/downloadtweets", ref = "0.4.0")
+devtools::install_github("kevincoakley/downloadtweets", ref = "0.5.0")
 
-library(downloadtweets)
+library(rehydratoR)
 library(jsonlite)
 
 tweet_ids_file <- "ids.txt" # Example from https://archive.org/details/gaza-tweets
@@ -23,7 +23,7 @@ accessTokenSecret <- ''
 tweet_ids <- data.frame(read.table(tweet_ids_file, numerals = 'no.loss'))
 
 # Download tweets
-download_tweets(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet_ids, 'example')
+rehydratoR(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet_ids, 'example')
 
 tweets <- fromJSON('example_001.json')
 show(tweets)

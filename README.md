@@ -1,4 +1,4 @@
-# easieR
+# rehydratoR
 
 This R package facilitates replication of Twitter-based research by providing a convenient function to download lists of tweets.  The user must acquire keys from Twitter on their own and provide tweet ID numbers.
 
@@ -10,7 +10,7 @@ The package is under active development and not yet released on CRAN.  It can be
 
 To install, need devtools.
 
-Need rtweet, dplyr, and tibble.  They will be called when the user loads the package.  
+Need rtweet, dplyr, tibble, and jsonlite.  They will be called when the user loads the package.  
 
 ### Example
 
@@ -22,7 +22,7 @@ kevincoakley, with zacharyst sending annoying e-mails.
 
 ## Versioning
 
-We use Github for versioning.  As of 08.28.2018, v3 is most recent.
+We use Github for versioning.  As of 10.19.2018, v5 is most recent.
 
 ## Authors
 

@@ -17,7 +17,7 @@
 #' @importFrom dplyr bind_rows count
 #' @importFrom jsonlite toJSON validate
 
-download_tweets <- function(consumer_key, consumer_secret, access_token, access_secret, status_ids, base_filename = NULL) {
+rehydratoR <- function(consumer_key, consumer_secret, access_token, access_secret, status_ids, base_filename = NULL) {
   create_token(
     app = "Download Tweets",
     consumer_key = consumer_key,
