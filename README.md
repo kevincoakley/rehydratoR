@@ -16,50 +16,9 @@ Users must acquire a *consumer key*, *consumer secret*, *access token*, and *acc
 
 ### Examples
 
-Tibble Download Example: 
+[Tibble Download Example](https://github.com/kevincoakley/rehydratoR/blob/master/example/example_tibble_download.R)
 	
-	tweet_ids_file <- "ids.txt" # Example from https://archive.org/details/gaza-tweets
-	
-	# Set the working directory
-	setwd('/home/rstudio/')
-
-  	# Get Twitter api keys from https://developer.twitter.com
-  	consumerKey <- ''
-  	consumerSecret <- ''
-  	accessToken <- ''
-  	accessTokenSecret <- ''
-
-  	# Read tweet ids from ids.txt
-  	tweet_ids <- data.frame(read.table(tweet_ids_file, numerals = 'no.loss'))
-
-  	# Download tweets
-  	tweets <- rehydratoR(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet_ids)
-
-	# Print out the tweets that were downloaded
-	show(tweets)
-	
-JSON File Download Example:
-
-	tweet_ids_file <- "ids.txt" # Example from https://archive.org/details/gaza-tweets
-	
-	# Set the working directory
-	setwd('/home/rstudio/')
-
-  	# Get Twitter api keys from https://developer.twitter.com
-  	consumerKey <- ''
-  	consumerSecret <- ''
-  	accessToken <- ''
-  	accessTokenSecret <- ''
-
-  	# Read tweet ids from ids.txt
-  	tweet_ids <- data.frame(read.table(tweet_ids_file, numerals = 'no.loss'))
-
-	# Download tweets to files named example_###.json
-	rehydratoR(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet_ids, 'example')
-
-	# Read & print tweets from first downloaded file
-	tweets <- fromJSON('example_001.json')
-	show(tweets)
+[JSON File Download Example](https://github.com/kevincoakley/rehydratoR/blob/master/example/example_json_file_download.R)
 
 ## Contributing
 
