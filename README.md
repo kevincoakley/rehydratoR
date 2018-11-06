@@ -1,28 +1,96 @@
 # rehydratoR
 
-This R package facilitates replication of Twitter-based research by providing a convenient function to download lists of tweets.  The user must acquire keys from Twitter on their own and provide tweet ID numbers.
+This R package facilitates replication of Twitter-based research by providing a convenient function to download lists of tweets.
+
+The input for the package is a list of tweet ID numbers. See [https://archive.org/details/gaza-tweets](https://archive.org/details/gaza-tweets) for an example. 
+
+The output of the package are the tweets downloaded as a [tibble](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) or as JSON files. Examples for both are below.
+
+This package limits the rate of tweet downloading so Twitter's 90,000 tweet/15 minute limit is not exceeded. If you choose to download the tweets to JSON files, then a new JSON file will be created for every 90,000 tweet ID numbers.
+
+Tweets that have been delete or made private cannot be downloaded.
 
 ## Getting Started
 
-The package is under active development and not yet released on CRAN.  It can be installed using R's devtools and the URL of the master repository.
+Users must acquire a *consumer key*, *consumer secret*, *access token*, and *access token secret* from [https://developer.twitter.com](https://developer.twitter.com) on their own.
 
-### Prerequisites
+### Examples
 
-To install, need devtools.
+Tibble Download Example: 
+	
+	tweet_ids_file <- "ids.txt" # Example from https://archive.org/details/gaza-tweets
+	
+	# Set the working directory
+	setwd('/home/rstudio/')
 
-Need rtweet, dplyr, tibble, and jsonlite.  They will be called when the user loads the package.  
+  	# Get Twitter api keys from https://developer.twitter.com
+  	consumerKey <- ''
+  	consumerSecret <- ''
+  	accessToken <- ''
+  	accessTokenSecret <- ''
 
-### Example
+  	# Read tweet ids from ids.txt
+  	tweet_ids <- data.frame(read.table(tweet_ids_file, numerals = 'no.loss'))
 
-Still need to write an example.
+  	# Download tweets
+  	tweets <- rehydratoR(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet_ids)
+
+	# Print out the tweets that were downloaded
+	show(tweets)
+	
+JSON File Download Example:
+
+	tweet_ids_file <- "ids.txt" # Example from https://archive.org/details/gaza-tweets
+	
+	# Set the working directory
+	setwd('/home/rstudio/')
+
+  	# Get Twitter api keys from https://developer.twitter.com
+  	consumerKey <- ''
+  	consumerSecret <- ''
+  	accessToken <- ''
+  	accessTokenSecret <- ''
+
+  	# Read tweet ids from ids.txt
+  	tweet_ids <- data.frame(read.table(tweet_ids_file, numerals = 'no.loss'))
+
+	# Download tweets to files named example_###.json
+	rehydratoR(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet_ids, 'example')
+
+	# Read & print tweets from first downloaded file
+	tweets <- fromJSON('example_001.json')
+	show(tweets)
 
 ## Contributing
 
 kevincoakley, with zacharyst sending annoying e-mails.
 
-## Versioning
+## Version History
 
-We use Github for versioning.  As of 10.19.2018, v5 is most recent.
+0.5.1
+
+* Prepping for CRAN release
+
+0.5.0
+
+* Renamed Project to rehydratoR
+
+0.4.0
+
+* Save tweets to JSON files
+
+0.3.0
+
+* Changed rate limiting from waiting 915 seconds after every loop to timing the length of every loop and ensuring every loop is at least 915 seconds
+
+0.2.0
+
+* Rate limiting
+* Added example file
+
+0.1.0
+
+* Initial Release
 
 ## Authors
 
