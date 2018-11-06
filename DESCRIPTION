@@ -5,8 +5,12 @@ Version: 0.5.0
 Authors@R: c(
     person("Kevin", "Coakley", email = "kcoakley@sdsc.edu", role = c("aut", "cre")),
     person("Zachary", "Steinert-Threlkeld", email = "zst@luskin.ucla.edu", role = "ctb"))
-Description: Downloads tweets from a list of tweet ids. Includes rate limiting 
-    for downloading tweets that exceed Twitter's 90,000 tweets/15 minute limit.
+Author: Kevin Coakley, Zachary Steinert-Threlkeld
+URL: https://kevincoakley.github.io/rehydratoR/
+BugReports: https://github.com/kevincoakley/rehydratoR/issues
+Description: This R package facilitates replication of Twitter-based research by providing 
+    a convenient function to download lists of tweets.
+Maintainer: Kevin Coakley <kcoakley@sdsc.edu>
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
