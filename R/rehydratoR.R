@@ -11,6 +11,21 @@
 #' @return A tibble of tweets data if base_filename is not defined. Nothing is returned if base_filename is defined
 #'   but the tweets are saved to a file for about every 90,0000 tweets.
 #'
+#' @examples
+#' \dontrun{
+#' # Get Twitter api keys from https://apps.twitter.com
+#' consumerKey <- ''
+#' consumerSecret <- ''
+#' accessToken <- ''
+#' accessTokenSecret <- ''
+#'
+#' # Read tweet ids
+#' tweet_ids <- data.frame(read.table(tweet_ids_file, numerals = 'no.loss'))
+#'
+#' # Download tweets
+#' tweets <- rehydratoR(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet_ids)
+#' }
+#'
 #' @export
 #' @importFrom rtweet create_token lookup_statuses
 #' @import tibble
