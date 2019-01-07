@@ -4,7 +4,7 @@ This R package facilitates replication of Twitter-based research by providing a 
 
 The input for the package is a list of tweet ID numbers. See [https://archive.org/details/gaza-tweets](https://archive.org/details/gaza-tweets) for an example. 
 
-The output of the package are the tweets downloaded as a [tibble](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html) or as JSON files. Examples for both are below.
+The output of the package are the tweets downloaded as a [tibble](https://CRAN.R-project.org/package=tibble) or as JSON files. Examples for both are below.
 
 This package limits the rate of tweet downloading so Twitter's 90,000 tweet/15 minute limit is not exceeded. If you choose to download the tweets to JSON files, then a new JSON file will be created for every 90,000 tweet ID numbers.
 
