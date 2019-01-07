@@ -1,6 +1,6 @@
 Package: rehydratoR
 Type: Package
-Title: Downloads Tweets From A List Of Tweet IDs
+Title: Downloads Tweets from a List of Tweet IDs
 Version: 0.5.1
 Authors@R: c(
     person("Kevin", "Coakley", email = "kcoakley@sdsc.edu", role = c("aut", "cre")),
