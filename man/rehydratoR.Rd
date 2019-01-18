@@ -5,7 +5,7 @@
 \title{Get tweets for given statuses (tweet IDs).}
 \usage{
 rehydratoR(consumer_key, consumer_secret, access_token, access_secret,
-  status_ids, base_filename = NULL)
+  status_ids, base_path = NULL)
 }
 \arguments{
 \item{consumer_key}{Consumer Key (API Key) from https://apps.twitter.com/}
@@ -18,11 +18,11 @@ rehydratoR(consumer_key, consumer_secret, access_token, access_secret,
 
 \item{status_ids}{data frame of tweet IDs}
 
-\item{base_filename}{optional. The base filename to use to save the tweets. If set, the fuction will
+\item{base_path}{optional. The base path to use to save the tweets. If set, the fuction will
 write the tweets to files instead of returning the tweets as a variable.}
 }
 \value{
-A tibble of tweets data if base_filename is not defined. Nothing is returned if base_filename is defined
+A tibble of tweets data if base_path is not defined. Nothing is returned if base_path is defined
   but the tweets are saved to a file for about every 90,0000 tweets.
 }
 \description{
