@@ -5,8 +5,9 @@
 #' @param access_token Access Token from the https://apps.twitter.com/
 #' @param access_secret Access Token Secret from https://apps.twitter.com/
 #' @param status_ids data frame of tweet IDs
-#' @param base_path optional. The base path to use to save the tweets. If set, the fuction will
+#' @param base_path optional. The base path to use to save the tweets. If set, the function will
 #'   write the tweets to files instead of returning the tweets as a variable.
+#' @param group_start is the group to start at after splitting list of ids.  Is useful in case the download was interrupted.
 #'
 #' @return A tibble of tweets data if base_path is not defined. Nothing is returned if base_path is defined
 #'   but the tweets are saved to a file for about every 90,0000 tweets.
@@ -32,7 +33,7 @@
 #' @importFrom dplyr bind_rows count
 #' @importFrom jsonlite toJSON validate
 
-rehydratoR <- function(consumer_key, consumer_secret, access_token, access_secret, status_ids, base_path = NULL) {
+rehydratoR <- function(consumer_key, consumer_secret, access_token, access_secret, status_ids, base_path = NULL, group_start = 1) {
   create_token(
     app = "Download Tweets",
     consumer_key = consumer_key,
@@ -48,12 +49,17 @@ rehydratoR <- function(consumer_key, consumer_secret, access_token, access_secre
   # Split the status ids in groups of 89,990 in order to advoid the 90,000/15 min api call limit
   rate_limited_status_ids <- split(status_ids, ceiling(seq_along(status_ids)/89990))
 
+  rate_limited_status_ids <- rate_limited_status_ids[group_start:length(rate_limited_status_ids)]
+
+
   # Create an empty tibble to store the downloaded tweets
   tweets <- tibble()
 
   message(sprintf("%s - Splitting tweets into %s groups", Sys.time(), length(rate_limited_status_ids)))
 
-  counter <- 1
+  message(sprintf(" Estimated download time is %s hours", length(rate_limited_status_ids)/4) )
+
+  counter <- group_start
   total_tweets <- 0
 
   for (statuses in rate_limited_status_ids) {
