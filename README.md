@@ -26,6 +26,12 @@ kevincoakley, with zacharyst sending annoying e-mails.
 
 ## Version History
 
+0.5.2
+
+* Added a parameter called group_start that takes the list of split tweet IDs and keeps only those from group_start to the final list. That way, if a download is interrupted, which is likely for large corpuses, the user can restart the download at the group_start chunk, not from the beginning.
+
+* Added a line to print an estimate of how long a download will take
+
 0.5.1
 
 * Prepping for CRAN release
