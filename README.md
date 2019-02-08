@@ -8,7 +8,7 @@ The output of the package are the tweets downloaded as a [tibble](https://CRAN.R
 
 This package limits the rate of tweet downloading so Twitter's 90,000 tweet/15 minute limit is not exceeded. If you choose to download the tweets to JSON files, then a new JSON file will be created for every 90,000 tweet ID numbers.
 
-Tweets that have been delete or made private cannot be downloaded.
+Tweets that have been deleted or made private cannot be downloaded.
 
 ## Getting Started
 

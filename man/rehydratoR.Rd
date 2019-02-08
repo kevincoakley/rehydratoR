@@ -22,8 +22,7 @@ rehydratoR(consumer_key, consumer_secret, access_token, access_secret,
 write the tweets to files instead of returning the tweets as a variable.}
 }
 \value{
-A tibble of tweets data if base_path is not defined. Nothing is returned if base_path is defined
-  but the tweets are saved to a file for about every 90,0000 tweets.
+A tibble of tweets data if base_path is not defined. Nothing is returned if base_path is defined; in that case, the tweets are saved to a file for about every 90,0000 tweets.
 }
 \description{
 Get tweets for given statuses (tweet IDs).
